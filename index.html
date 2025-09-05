@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeless WotLK - Remastered World of Warcraft</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --wow-blue: #56C3E0;
+            --wow-gold: #F8D943;
+            --wow-black: #110F13;
+            --wow-red: #D32D1F;
+            --wow-gray: #2a2a2a;
+            --wow-light-gray: #3a3a3a;
+            --wow-purple: #9482C9;
+            --wow-green: #1EFF00;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--wow-black);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--wow-gold);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--wow-gold), transparent);
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            color: var(--wow-blue);
+            margin-bottom: 1rem;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 15, 19, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(86, 195, 224, 0.2);
+        }
+        
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 20px rgba(86, 195, 224, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--wow-gold);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: var(--wow-blue);
+        }
+        
+        /* Hero Section with Parallax */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(17, 15, 19, 0.4), rgba(17, 15, 19, 0.7)), 
+                        url('remastered.png') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(17, 15, 19, 0.3) 100%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            color: var(--wow-gold);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--wow-blue);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+        
+        .download-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            position: relative;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out 0.4s;
+            animation-fill-mode: both;
+            overflow: hidden;
+            border-radius: 50px;
+            background: linear-gradient(45deg, var(--wow-purple), var(--wow-blue));
+            box-shadow: 0 4px 15px rgba(86, 195, 224, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .download-button:hover::before {
+            left: 100%;
+        }
+        
+        .download-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(86, 195, 224, 0.6);
+            border-color: var(--wow-gold);
+            background: linear-gradient(45deg, var(--wow-blue), var(--wow-purple));
+        }
+        
+        .download-button i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section:nth-child(even) {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.3), rgba(17, 15, 19, 0.5));
+        }
+        
+        /* Mods Section */
+        .mods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .mod-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(86, 195, 224, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mod-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(86, 195, 224, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .mod-card:hover::before {
+            left: 100%;
+        }
+        
+        .mod-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(86, 195, 224, 0.3);
+            border-color: var(--wow-blue);
+        }
+        
+        .mod-title {
+            color: var(--wow-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .mod-description {
+            color: #cccccc;
+            font-size: 0.95rem;
+        }
+        
+        /* Interface Section */
+        .interface-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .interface-item {
+            background: rgba(86, 195, 224, 0.1);
+            border-left: 4px solid var(--wow-blue);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .interface-item:hover {
+            background: rgba(86, 195, 224, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .interface-item h4 {
+            color: var(--wow-gold);
+            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        /* Warning Box for Essential Addons */
+        .warning-box {
+            background: rgba(211, 45, 31, 0.1);
+            border: 1px solid rgba(211, 45, 31, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--wow-red);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .warning-box h3 {
+            color: var(--wow-red);
+            margin-bottom: 1rem;
+        }
+        
+        .warning-box p {
+            color: #ffcccc;
+            line-height: 1.6;
+        }
+        
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(86, 195, 224, 0.4);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(17, 15, 19, 0.9));
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Credits Section */
+        .credits {
+            background: linear-gradient(135deg, var(--wow-black), var(--wow-gray));
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .credits-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .credits h2 {
+            color: var(--wow-gold);
+        }
+        
+        .credits-text {
+            font-size: 1.1rem;
+            color: #cccccc;
+            margin-top: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--wow-black);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(86, 195, 224, 0.3);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                background-attachment: scroll;
+            }
+            
+            .mods-grid,
+            .interface-showcase,
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--wow-black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(86, 195, 224, 0.3);
+            border-top: 3px solid var(--wow-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--wow-blue);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: var(--wow-gold);
+            transform: translateY(-5px);
+        }
+        
+        /* Feature Enhancement - Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Enhanced Card Effects */
+        .enhanced-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(86, 195, 224, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .enhanced-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(86, 195, 224, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        /* Tooltip Enhancement */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: rgba(17, 15, 19, 0.95);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid rgba(86, 195, 224, 0.3);
+            font-size: 0.9rem;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <h3 style="color: var(--wow-gold);">Loading Timeless WotLK...</h3>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Timeless WotLK</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#mods">Mods</a></li>
+                <li><a href="#interface">Interface</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#credits">Credits</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-element" style="top: 20%; left: 10%; font-size: 3rem;">
+            <i class="fas fa-dragon"></i>
+        </div>
+        <div class="floating-element" style="top: 60%; right: 15%; font-size: 2.5rem; animation-delay: 2s;">
+            <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="hero-content">
+            <h1>Timeless WotLK</h1>
+            <p class="hero-subtitle">A Remastered World of Warcraft Wrath of the Lich King Client</p>
+            <a href="#download" class="download-button" id="downloadBtn">
+                <i class="fas fa-download"></i>Download
+            </a>
+        </div>
+    </section>
+    <!-- Mods Section -->
+    <section class="section" id="mods">
+        <div class="container">
+            <h2 class="fade-in">Remastered Mods & Patches</h2>
+            <p class="fade-in" style="color: #cccccc; margin-bottom: 2rem;">
+                Re-experience World of Warcraft with this carefully curated collection of remastered mods and patches. 
+                Each component is designed to enhance your gaming experience while maintaining the classic WotLK feel.
+            </p>
+            
+            <div class="mods-grid">
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-A</h3>
+                    <p class="mod-description">Updated loading screen for a modern first impression</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-C</h3>
+                    <p class="mod-description">Modern race and class icons in the character creation screen</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-B</h3>
+                    <p class="mod-description">Updated item models with enhanced detail and visual fidelity</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-F</h3>
+                    <p class="mod-description">CLASSIC HD for WotLK - Enhanced armor textures and details</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-E</h3>
+                    <p class="mod-description">Updated clothing with improved fabric textures and movement</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-D</h3>
+                    <p class="mod-description">WoW Remastered v8.2 - Complete world texture overhaul including characters, NPCs, creatures, blood effects, and login tweaks</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-W</h3>
+                    <p class="mod-description">Project Epoch's Water Patch - Realistic water rendering and effects</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-H</h3>
+                    <p class="mod-description">Enhanced abilities and spells with improved visual effects</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-G</h3>
+                    <p class="mod-description">Sunlight Alpha Texture - Improved lighting and atmospheric effects</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-4 & patch-5</h3>
+                    <p class="mod-description">Old World Music Rescore - Vanilla zone music replaced with rescored Cataclysm versions</p>
+                </div>
+                
+                <div class="mod-card fade-in">
+                    <h3 class="mod-title">patch-6</h3>
+                    <p class="mod-description">T10 Armor in Character Creation Menu - Preview tier 10 sets during character creation</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <div class="enhanced-card fade-in">
+                    <h3 style="color: var(--wow-red); margin-bottom: 1rem;">
+                        <i class="fas fa-map"></i> Data/enUS Enhancements
+                    </h3>
+                    <div class="mod-card" style="background: rgba(255, 255, 255, 0.03);">
+                        <h3 class="mod-title">patch-enUS-M & patch-enUS-N</h3>
+                        <p class="mod-description">Classic/TBC Dungeon maps and experimental Cavern and Mines WotLK maps for enhanced navigation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(86, 195, 224, 0.1); border-radius: 10px;">
+                <p style="color: var(--wow-blue); font-weight: 600;">
+                    <i class="fas fa-info-circle"></i> <strong>Easy Customization:</strong> All patches are removable by simply deleting the patch file you don't like. 
+                    For WoW Remastered components, use MPQEditor for precise customization.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Interface Section -->
+    <section class="section" id="interface">
+        <div class="container">
+            <h2 class="fade-in">Enhanced Interface & Addons</h2>
+            <p class="fade-in" style="color: #cccccc; margin-bottom: 2rem;">
+                A carefully selected collection of addons and interface enhancements that work seamlessly together 
+                to provide the ultimate WotLK experience.
+            </p>
+            
+            <!-- Warning Box for Essential Addons -->
+            <div class="warning-box fade-in">
+                <h3>Essential Addons - Do Not Delete!</h3>
+                <p>
+                    These addons are specifically patched to work with <strong>patch-enUS-M</strong> and <strong>patch-enUS-N</strong>. 
+                    Using original versions or different versions of these addons will cause compatibility issues and may break 
+                    the enhanced map functionality. They are carefully configured to integrate with the custom map system.
+                </p>
+            </div>
+            
+            <div style="margin-bottom: 3rem;">
+                <h3 style="color: var(--wow-red); margin-bottom: 1rem;">
+                    <i class="fas fa-exclamation-triangle"></i> Essential Addons
+                </h3>
+                <div class="interface-showcase">
+                    <div class="interface-item fade-in">
+                        <h4>Astrolabe</h4>
+                        <p>Enhanced mapping and coordinate system</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>GatherMate</h4>
+                        <p>Resource gathering and tracking</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>LibMapData</h4>
+                        <p>Core mapping library functionality</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Mapster</h4>
+                        <p>Enhanced world map interface</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Questie-335</h4>
+                        <p>Advanced quest tracking and helpers</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>WDM</h4>
+                        <p>World database management</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 3rem;">
+                <h3 style="color: var(--wow-gold); margin-bottom: 1rem;">
+                    <i class="fas fa-cog"></i> Optional Enhancements (Safe to Remove)
+                </h3>
+                <div class="interface-showcase">
+                    <div class="interface-item fade-in">
+                        <h4>High Quality Icons</h4>
+                        <p>Crisp, high-definition interface icons</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>The War Within Spellbook</h4>
+                        <p>Modern spellbook interface design</p>
+                    </div>
+                </div>
+                <p style="color: var(--wow-blue); margin-top: 1rem; font-style: italic;">
+                    Located in: INTERFACE FOLDER (not Addons folder) - Remove everything in Interface folder except the Addons folder if you wish to remove them.
+                </p>
+            </div>
+            
+            <div>
+                <h3 style="color: var(--wow-blue); margin-bottom: 1rem;">
+                    <i class="fas fa-star"></i> Addon Collection
+                </h3>
+                <div class="interface-showcase">
+                    <div class="interface-item fade-in">
+                        <h4>Beautimous</h4>
+                        <p>Automatic CVars optimization for maximum visual quality</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>DragonUI</h4>
+                        <p>Dragonflight retail UI with full customization</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Bagnon</h4>
+                        <p>Unified inventory, bank, and key management with new item notifications</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>CompactRaidFrame</h4>
+                        <p>Complete raid frame package with enhanced features</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Clique</h4>
+                        <p>Advanced click-casting and hover-casting system</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Skada-WoTLK</h4>
+                        <p>Up-to-date damage meter with custom profiles</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>MikScrollingBattleText</h4>
+                        <p>Customizable combat text display</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>WIM</h4>
+                        <p>Advanced whisper management with chat windows</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Zoom</h4>
+                        <p>UI performance optimization for faster loading</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Minimap Button Frame</h4>
+                        <p>Minimap button organization and decluttering</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Cheese</h4>
+                        <p>Cataclysm-style proc bars and notifications</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>Kui Nameplates</h4>
+                        <p>Premium nameplate system with extensive customization</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>OmniCC</h4>
+                        <p>Universal cooldown counter for all abilities</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>WeakAuras</h4>
+                        <p>Highly customizable UI graphics for buffs/debuffs</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>GearScore Lite</h4>
+                        <p>Player and item scoring in tooltips</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>FasterLoot</h4>
+                        <p>Optimized looting speed and performance</p>
+                    </div>
+                    <div class="interface-item fade-in">
+                        <h4>HideMuteErrors</h4>
+                        <p>Clean interface by hiding error messages and sounds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="fade-in">Visual Showcase</h2>
+            <p class="fade-in" style="color: #cccccc; margin-bottom: 2rem;">
+                Witness the transformation of World of Warcraft through our remastered visuals and enhanced interface elements.
+            </p>
+            
+            <div class="image-gallery">
+                <div class="gallery-item fade-in">
+                    <img src="loadingscreen.png" alt="Loading Screen" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Modern Loading Screen</h4>
+                        <p>First impressions matter</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item fade-in">
+                    <img src="spellbook.png" alt="Spellbook" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Enhanced Spellbook</h4>
+                        <p>Beautiful ability interface</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item fade-in">
+                    <img src="ui.png" alt="User Interface" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Modern UI Design</h4>
+                        <p>Clean, functional, and beautiful</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Credits Section -->
+    <section class="credits" id="credits">
+        <div class="container">
+            <div class="credits-content">
+                <h2>Credits & Gratitude</h2>
+                <p class="credits-text">
+                    <i class="fas fa-heart" style="color: var(--wow-red);"></i> 
+                    Every single modder, addon maintainer, and passionate player who keeps this incredible game alive. 
+                    Your dedication, creativity, and love for World of Warcraft has made this remastered experience possible. 
+                    Nothing but respect and appreciation for your amazing work! 
+                    <i class="fas fa-heart" style="color: var(--wow-red);"></i>
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Timeless WotLK</p>
+        </div>
+    </footer>
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        // Fade In Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        // Parallax Effect for Hero Section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.5;
+            
+            if (parallax) {
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+        
+        // Download Button Functionality with your specific link
+        const downloadBtn = document.getElementById('downloadBtn');
+        const downloadUrl = 'https://transfer.it/t/9yBLgUkHHLCD';
+        
+        downloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Create a temporary notification
+            const notification = document.createElement('div');
+            notification.innerHTML = '<i class="fas fa-download"></i> Starting download...';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, var(--wow-purple), var(--wow-blue));
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(86, 195, 224, 0.4);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Create a hidden anchor element to trigger the download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = downloadUrl;
+            downloadLink.target = '_blank'; // Open in new tab
+            downloadLink.download = 'TimelessWotLK.zip'; // Suggested filename
+            
+            // Trigger the download
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(downloadLink);
+                notification.innerHTML = '<i class="fas fa-check-circle"></i> Download started! Check your downloads folder.';
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }, 1000);
+        });
+        
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Image Optimization Helper
+        function optimizeImages() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.classList.add('loaded');
+                });
+            });
+        }
+        
+        // Enhanced Parallax for Floating Elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const floatingElements = document.querySelectorAll('.floating-element');
+            
+            floatingElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.3;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            optimizeImages();
+        });
+    </script>
+</body>
+</html>
